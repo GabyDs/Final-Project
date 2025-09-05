@@ -174,3 +174,5 @@
 6	8278	1757082841982795803	/home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc/build/bootloader/esp-idf/main/cmake_install.cmake	a47e1f2c1a91f4f0
 15	169	1757082842045794414	esp-idf/esptool_py/CMakeFiles/bootloader_check_size	171d391d35cc91f7
 15	169	1757082842045794414	/home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc/build/bootloader/esp-idf/esptool_py/CMakeFiles/bootloader_check_size	171d391d35cc91f7
+7	66	1757083205704746153	esp-idf/esptool_py/CMakeFiles/bootloader_check_size	171d391d35cc91f7
+7	66	1757083205704746153	/home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc/build/bootloader/esp-idf/esptool_py/CMakeFiles/bootloader_check_size	171d391d35cc91f7
