@@ -1,7 +1,7 @@
 {
     "version":            "1.2",
     "project_name":       "sd_card",
-    "project_version":    "v5.5-dirty",
+    "project_version":    "9e033ba-dirty",
     "project_path":       "/home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc",
     "idf_path":           "/home/gabrields/ESP-IDF/v5.5/esp-idf",
     "build_dir":          "/home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc/build",
@@ -790,7 +790,7 @@
             "managed_reqs": [],
             "managed_priv_reqs": [ "espressif__esp32-camera" ],
             "file": "/home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc/build/esp-idf/main/libmain.a",
-            "sources": [ "/home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc/main/sd_card_example_main.c" ],
+            "sources": [ "/home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc/main/main.c", "/home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc/main/camera_driver.c", "/home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc/main/sd_card_driver.c", "/home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc/main/file_operations.c" ],
             "include_dirs": [ "." ]
         },
         "mbedtls": {
