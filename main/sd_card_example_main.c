@@ -64,7 +64,7 @@ static camera_config_t camera_config = {
     .ledc_timer = LEDC_TIMER_0,
     .ledc_channel = LEDC_CHANNEL_0,
 
-    .pixel_format = PIXFORMAT_RGB565, // YUV422,GRAYSCALE,RGB565,JPEG
+    .pixel_format = PIXFORMAT_JPEG, // YUV422,GRAYSCALE,RGB565,JPEG
     .frame_size = FRAMESIZE_QVGA,     // QQVGA-UXGA, For ESP32, do not use sizes above QVGA when not JPEG. The performance of the ESP32-S series has improved a lot, but JPEG mode always gives better frame rates.
 
     .jpeg_quality = 12, // 0-63, for OV series camera sensors, lower number means higher quality
@@ -152,19 +152,22 @@ pin_configuration_t config = {
 };
 #endif // CONFIG_EXAMPLE_DEBUG_PIN_CONNECTIONS
 
-static esp_err_t s_example_write_file(const char *path, char *data)
+static esp_err_t s_example_write_file(const char *path, const uint8_t *data, size_t size)
 {
     ESP_LOGI(TAG, "Opening file %s", path);
-    FILE *f = fopen(path, "w");
+    FILE *f = fopen(path, "wb");
     if (f == NULL)
     {
         ESP_LOGE(TAG, "Failed to open file for writing");
         return ESP_FAIL;
     }
-    fprintf(f, data);
+    size_t written = fwrite(data, 1, size, f);
     fclose(f);
-    ESP_LOGI(TAG, "File written");
-
+    if (written != size) {
+        ESP_LOGE(TAG, "Failed to write complete data to file");
+        return ESP_FAIL;
+    }
+    ESP_LOGI(TAG, "File written (%zu bytes)", written);
     return ESP_OK;
 }
 
@@ -317,37 +320,37 @@ void app_main(void)
     // Use POSIX and C standard library functions to work with files:
 
     // First create a file.
-    const char *file_hello = MOUNT_POINT "/hello.txt";
-    char data[EXAMPLE_MAX_CHAR_SIZE];
-    snprintf(data, EXAMPLE_MAX_CHAR_SIZE, "%s %s!\n", "Hello", card->cid.name);
-    ret = s_example_write_file(file_hello, data);
-    if (ret != ESP_OK)
-    {
-        return;
-    }
+    // const char *file_hello = MOUNT_POINT "/hello.txt";
+    // char data[EXAMPLE_MAX_CHAR_SIZE];
+    // snprintf(data, EXAMPLE_MAX_CHAR_SIZE, "%s %s!\n", "Hello", card->cid.name);
+    // ret = s_example_write_file(file_hello, data);
+    // if (ret != ESP_OK)
+    // {
+    //     return;
+    // }
 
-    const char *file_foo = MOUNT_POINT "/foo.txt";
-    // Check if destination file exists before renaming
-    struct stat st;
-    if (stat(file_foo, &st) == 0)
-    {
-        // Delete it if it exists
-        unlink(file_foo);
-    }
+    // const char *file_foo = MOUNT_POINT "/foo.txt";
+    // // Check if destination file exists before renaming
+    // struct stat st;
+    // if (stat(file_foo, &st) == 0)
+    // {
+    //     // Delete it if it exists
+    //     unlink(file_foo);
+    // }
 
     // Rename original file
-    ESP_LOGI(TAG, "Renaming file %s to %s", file_hello, file_foo);
-    if (rename(file_hello, file_foo) != 0)
-    {
-        ESP_LOGE(TAG, "Rename failed");
-        return;
-    }
+    // ESP_LOGI(TAG, "Renaming file %s to %s", file_hello, file_foo);
+    // if (rename(file_hello, file_foo) != 0)
+    // {
+    //     ESP_LOGE(TAG, "Rename failed");
+    //     return;
+    // }
 
-    ret = s_example_read_file(file_foo);
-    if (ret != ESP_OK)
-    {
-        return;
-    }
+    // ret = s_example_read_file(file_foo);
+    // if (ret != ESP_OK)
+    // {
+    //     return;
+    // }
 
     // Format FATFS
 #ifdef CONFIG_EXAMPLE_FORMAT_SD_CARD
@@ -369,25 +372,21 @@ void app_main(void)
     }
 #endif // CONFIG_EXAMPLE_FORMAT_SD_CARD
 
-    const char *file_nihao = MOUNT_POINT "/nihao.txt";
-    memset(data, 0, EXAMPLE_MAX_CHAR_SIZE);
-    snprintf(data, EXAMPLE_MAX_CHAR_SIZE, "%s %s!\n", "Nihao", card->cid.name);
-    ret = s_example_write_file(file_nihao, data);
-    if (ret != ESP_OK)
-    {
-        return;
-    }
+    // const char *file_nihao = MOUNT_POINT "/nihao.txt";
+    // memset(data, 0, EXAMPLE_MAX_CHAR_SIZE);
+    // snprintf(data, EXAMPLE_MAX_CHAR_SIZE, "%s %s!\n", "Nihao", card->cid.name);
+    // ret = s_example_write_file(file_nihao, data);
+    // if (ret != ESP_OK)
+    // {
+    //     return;
+    // }
 
-    // Open file for reading
-    ret = s_example_read_file(file_nihao);
-    if (ret != ESP_OK)
-    {
-        return;
-    }
-
-    // All done, unmount partition and disable SDMMC peripheral
-    esp_vfs_fat_sdcard_unmount(mount_point, card);
-    ESP_LOGI(TAG, "Card unmounted");
+    // // Open file for reading
+    // ret = s_example_read_file(file_nihao);
+    // if (ret != ESP_OK)
+    // {
+    //     return;
+    // }
 
     // Deinitialize the power control driver if it was used
 #if CONFIG_EXAMPLE_SD_PWR_CTRL_LDO_INTERNAL_IO
@@ -406,8 +405,18 @@ void app_main(void)
 
         // use pic->buf to access the image
         ESP_LOGI(TAG, "Picture taken! Its size was: %zu bytes", pic->len);
+        
+
+        const char *file_img = MOUNT_POINT "/picture.jpg";
+        // memset(data, 0, pic->len);
+        ret = s_example_write_file(file_img, pic->buf, pic->len);
+
         esp_camera_fb_return(pic);
 
         vTaskDelay(5000 / portTICK_RATE_MS);
     }
+
+    // All done, unmount partition and disable SDMMC peripheral
+    esp_vfs_fat_sdcard_unmount(mount_point, card);
+    ESP_LOGI(TAG, "Card unmounted");
 }
