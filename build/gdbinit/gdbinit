@@ -1,2 +1,2 @@
-source /home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc/build/gdbinit/symbols
-source /home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc/build/gdbinit/connect
+source /home/fab/Projects/sdmmc/build/gdbinit/symbols
+source /home/fab/Projects/sdmmc/build/gdbinit/connect

@@ -2,6 +2,7 @@
     "idf.port": "/dev/ttyUSB0",
     "idf.flashType": "UART",
     "files.associations": {
-        "cstdio": "c"
+        "cstdio": "c",
+        "esp_camera.h": "c"
     }
 }

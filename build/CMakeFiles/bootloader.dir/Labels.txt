@@ -1,13 +1,13 @@
 # Target labels
  bootloader
 # Source files and their labels
-/home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc/build/CMakeFiles/bootloader
-/home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc/build/CMakeFiles/bootloader.rule
-/home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc/build/CMakeFiles/bootloader-complete.rule
-/home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
-/home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
-/home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
-/home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
-/home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
-/home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
-/home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
+/home/fab/Projects/sdmmc/build/CMakeFiles/bootloader
+/home/fab/Projects/sdmmc/build/CMakeFiles/bootloader.rule
+/home/fab/Projects/sdmmc/build/CMakeFiles/bootloader-complete.rule
+/home/fab/Projects/sdmmc/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+/home/fab/Projects/sdmmc/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/home/fab/Projects/sdmmc/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/home/fab/Projects/sdmmc/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/home/fab/Projects/sdmmc/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/home/fab/Projects/sdmmc/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/home/fab/Projects/sdmmc/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

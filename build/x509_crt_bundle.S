@@ -1,4 +1,4 @@
-/* * Data converted from /home/gabrields/ESP-IDF/v5.5/esp-idf/examples/storage/sd_card/sdmmc/build/esp-idf/mbedtls/x509_crt_bundle
+/* * Data converted from /home/fab/Projects/sdmmc/build/esp-idf/mbedtls/x509_crt_bundle
  */
 .data
 #if !defined (__APPLE__) && !defined (__linux__)
