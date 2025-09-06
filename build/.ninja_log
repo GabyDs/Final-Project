@@ -1364,3 +1364,5 @@
 26869	27042	1757183816606558127	/home/fab/Projects/sdmmc/build/.bin_timestamp	d68515951b6020cf
 27042	27098	1757183816606558127	esp-idf/esptool_py/CMakeFiles/app_check_size	b2a5d3ff1ba61798
 27042	27098	1757183816606558127	/home/fab/Projects/sdmmc/build/esp-idf/esptool_py/CMakeFiles/app_check_size	b2a5d3ff1ba61798
+29	1526424	1757183223935811980	CMakeFiles/confserver	4b17756f1ac6fb78
+29	1526424	1757183223935811980	/home/fab/Projects/sdmmc/build/CMakeFiles/confserver	4b17756f1ac6fb78
