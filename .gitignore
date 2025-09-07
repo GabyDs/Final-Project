@@ -1,18 +1,69 @@
+# VSCode settings
+.vscode/
+
+# Python cache
 .pytest_cache/
 __pycache__/
 
-# esp-idf built binaries
+# ESP-IDF build artifacts
 build/
 build_*_*/
 sdkconfig
+sdkconfig.old
 
-# idf-ci build run output
+# CMake build files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+build.ninja
+compile_commands.json
+
+# ESP-IDF component build artifacts
+esp-idf/
+
+# Configuration and build environment
+config/
+config.env
+gdbinit/
+
+# Flash arguments and project files
+*flash_args*
+*-flash_args*
+flash_*_args
+flasher_args.json
+project_description.json
+
+# Kconfig files
+kconfigs.in
+kconfigs_projbuild.in
+
+# Linker files
+ldgen_libraries*
+
+# Bootloader build artifacts
+bootloader-prefix/
+
+# Partition table
+partition-table-flash_args
+
+# IDF-CI build run output
 build_summary_*.xml
 app_info_*.txt
 size_info_*.txt
 
-# pytest-embedded log folder
+# Pytest-embedded log folder
 pytest_embedded_log/
 
-# idf-component-manager output
+# IDF Component Manager output
 dependencies.lock
+managed_components/
+
+# Binary files
+*.bin
+*.elf
+*.map
+
+# Temporary files
+*.tmp
+*.bak
+*~
