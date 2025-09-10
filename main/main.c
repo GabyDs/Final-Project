@@ -24,14 +24,26 @@
 /* FreeRTOS includes */
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "freertos/queue.h"
+#include "freertos/queue.h"
 
 /* Application modules */
 #include "app_config.h"
 #include "camera_driver.h"
 #include "sd_card_driver.h"
 #include "file_operations.h"
+#include "driver/gpio.h"
+
+#define PIR_SENSOR_PIN 12 // GPIO 12
 
 static const char *TAG = "camera_sd_example";
+uint8_t intr_flag = 0;
+
+// ISR handler for GPIO interrupt
+static void IRAM_ATTR gpio_isr_handler(void* arg) {
+    // ESP_LOGI(TAG, "Rising edge detected on GPIO 12!");
+    intr_flag = 1;
+}
 
 /**
  * @brief Capture and save a photo to SD card
@@ -67,6 +79,20 @@ static esp_err_t capture_and_save_photo(void)
  */
 void app_main(void)
 {
+    // Install GPIO ISR service and add handler
+    gpio_install_isr_service(0); // already installed
+    gpio_isr_handler_add(PIR_SENSOR_PIN, gpio_isr_handler, NULL);
+
+    // Configure GPIO 12 as input with pull-down and interrupt on rising edge
+    gpio_config_t io_conf = {
+        .intr_type = GPIO_INTR_POSEDGE,
+        .mode = GPIO_MODE_INPUT,
+        .pin_bit_mask = (1ULL << PIR_SENSOR_PIN),
+        .pull_down_en = 1,
+        .pull_up_en = 0,
+    };
+    gpio_config(&io_conf);
+
     ESP_LOGI(TAG, "Starting Camera SD Card Example");
 
     /* Initialize camera */
@@ -99,6 +125,20 @@ void app_main(void)
         return;
     }
 #endif
+
+    // Configure GPIO 12 as input with pull-down and interrupt on rising edge
+    gpio_config_t io_conf = {
+        .intr_type = GPIO_INTR_POSEDGE,
+        .mode = GPIO_MODE_INPUT,
+        .pin_bit_mask = (1ULL << PIR_SENSOR_PIN),
+        .pull_down_en = 1,
+        .pull_up_en = 0,
+    };
+    gpio_config(&io_conf);
+
+    // Install GPIO ISR service and add handler
+    // gpio_install_isr_service(0); // already installed
+    gpio_isr_handler_add(PIR_SENSOR_PIN, gpio_isr_handler, NULL);
 
     ESP_LOGI(TAG, "Initiating camera warm-up delay (3 seconds)...");
     vTaskDelay(3000 / portTICK_PERIOD_MS);
@@ -135,5 +175,19 @@ void app_main(void)
     while (1)
     {
         vTaskDelay(1000 / portTICK_PERIOD_MS);
+        
+        if (intr_flag == 1) {
+            ESP_LOGI(TAG, "Motion detected! Capturing photo...");
+            // esp_err_t ret = capture_and_save_photo();
+            // if (ret == ESP_OK)
+            // {
+            //     ESP_LOGI(TAG, "Photo captured and saved successfully!");
+            // }
+            // else
+            // {
+            //     ESP_LOGE(TAG, "Failed to capture/save photo: %s", esp_err_to_name(ret));
+            // }
+            intr_flag = 0;
+        }
     }
 }
