@@ -5,7 +5,7 @@ set(srcs "main.c"
 
 idf_component_register(SRCS ${srcs}
                        INCLUDE_DIRS "."
-                       REQUIRES fatfs sd_card nvs_flash esp_psram
+                       REQUIRES fatfs sd_card nvs_flash esp_psram esp_wifi esp_driver_gpio
                        WHOLE_ARCHIVE)
 
 if(NOT CONFIG_SOC_SDMMC_HOST_SUPPORTED)
