@@ -131,7 +131,7 @@ void esp_mesh_p2p_tx_main(void *arg)
         snprintf((char *)tx_buf, sizeof(tx_buf), "Hello Mesh %d", send_count);
 
         // err = esp_mesh_send(&route_table[i], &data, MESH_DATA_P2P, NULL, 0);
-        err = esp_mesh_send(&mesh_parent_addr, &data, MESH_DATA_P2P, NULL, 0);
+        err = esp_mesh_send(NULL, &data, MESH_DATA_P2P, NULL, 0);
 
         if (err) {
             ESP_LOGE(MESH_TAG,
@@ -457,7 +457,11 @@ void setup_mesh(void)
     
     ESP_ERROR_CHECK(esp_mesh_set_config(&cfg));
 
+    /* Disable self-organization and manually set this node as root */
     ESP_ERROR_CHECK(esp_mesh_set_self_organized(true, true));
+    
+    // Enabling fixed root disables automatic election of the root node via voting
+    ESP_ERROR_CHECK(esp_mesh_fix_root(true));
     
     /* mesh start */
     ESP_ERROR_CHECK(esp_mesh_start());
