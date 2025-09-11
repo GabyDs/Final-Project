@@ -1,4 +1,4 @@
-set(srcs "main.c"
+set(srcs "main.c" "mesh_setup.c"
          "camera_driver.c"
          "sd_card_driver.c"
          "file_operations.c")
